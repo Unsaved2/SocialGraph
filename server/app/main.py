@@ -1,7 +1,17 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware 
 import json, os
 
 app = FastAPI()
+
+# Add CORS middleware to allow requests from your Next.js domain (adjust as needed)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Change to your client's URL in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def get_graph_file_path():
     # Get the absolute path of the current file (this script)
